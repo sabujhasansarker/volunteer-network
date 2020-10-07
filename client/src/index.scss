@@ -20,3 +20,16 @@ body {
     }
   }
 }
+
+// header
+header {
+  nav {
+    @include flex(space-between);
+    ul {
+      @include flex(space-between);
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}

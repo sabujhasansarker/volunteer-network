@@ -12,9 +12,11 @@ const Registration = () => {
         <Link to="/" className="logo">
           <img src={logo} alt="Logo" />
         </Link>
-        <div className="login-container w-33 p-relative p-20">
+        <div className="login-container w-40 p-relative p-36">
           <div className="login-content w-100 ">
-            <h1 className="heading text-left">Register as a Volunteer</h1>
+            <h1 className="heading text-left f-700 fs-24">
+              Register as a Volunteer
+            </h1>
             <form className="form text-left">
               <div className="form-group mt-40">
                 <div className="form-item">
@@ -70,7 +72,7 @@ const Registration = () => {
                 <div className="form-item">
                   <input
                     type="submit"
-                    className="button d-block w-100 text-center p-12 f-500 fs-16 border-none bg3f90fc"
+                    className="button d-block w-100 text-center p-12 f-500 fs-16 border-none bg-3f90fc"
                     value="Registration"
                   />
                 </div>

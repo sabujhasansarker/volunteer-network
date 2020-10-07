@@ -93,6 +93,11 @@
     font-size: #{$i}px;
   }
 }
+@for $i from 1 through 100 {
+  .br-#{$i } {
+    border-radius: #{$i}px;
+  }
+}
 
 @each $position in (relative, absolute, fixed) {
   .p-#{$position} {
@@ -110,8 +115,33 @@
   }
 }
 
-@each $background in ($btn_1, $btn_2, $btn_3) {
-  .bg#{$background} {
-    background: $background;
+@each $color in (white, black, green, blue) {
+  .text-#{$color} {
+    color: $color;
+  }
+}
+
+@function setBg($color) {
+  @if (lightness($color) > 70) {
+    @return #333;
+  } @else {
+    @return #fff;
+  }
+}
+
+@mixin tab() {
+  @media (max-width: 769px) {
+    @content;
+  }
+}
+@mixin phn() {
+  @media (max-width: 426px) {
+    @content;
+  }
+}
+
+@mixin custom($screen) {
+  @media (max-width: $screen) {
+    @content;
   }
 }

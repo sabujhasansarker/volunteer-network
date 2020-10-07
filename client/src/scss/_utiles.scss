@@ -28,3 +28,27 @@ input {
     color: black;
   }
 }
+
+.bg-3f90fc {
+  background: #3f90fc;
+  color: setBg(#3f90fc);
+  &:hover {
+    background: darken(#3f90fc, 10%);
+  }
+}
+.bg-434141 {
+  background: #434141;
+  color: setBg(#434141);
+  &:hover {
+    background: darken(#434141, 10%);
+  }
+}
+
+.container {
+  width: 75%;
+  margin: 0 auto;
+}
+
+ul {
+  list-style: none;
+}
