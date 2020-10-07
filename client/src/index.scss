@@ -14,6 +14,9 @@ body {
     background: white;
     margin-top: 3rem;
     min-height: 457px;
+    @include custom(1050px) {
+      width: 90%;
+    }
     .google {
       border: 1px solid #ababab;
       border-radius: 57px;
@@ -25,10 +28,66 @@ body {
 header {
   nav {
     @include flex(space-between);
+    @include custom(970px) {
+      align-items: flex-start;
+    }
     ul {
       @include flex(space-between);
       a {
         text-decoration: none;
+      }
+    }
+    // nav responsive
+    @include custom(970px) {
+      .responsive-desktop {
+        ul {
+          display: block;
+          position: absolute;
+          left: 0;
+          width: 100%;
+          background: gray;
+          top: 5.5rem;
+          border-radius: 4px;
+          box-sizing: border-box;
+          line-height: 3;
+          text-align: center;
+          z-index: 990;
+          height: 0;
+          overflow: hidden;
+          transition: 1s all;
+          .ml-40,
+          .ml-20 {
+            margin-left: 0 !important;
+          }
+          .ml-20 {
+            margin-top: 10px;
+          }
+          .br-4 {
+            width: 300px;
+            margin: 0 auto;
+            display: block;
+            padding: 0 !important;
+          }
+        }
+      }
+      .responsive-desktop.responsive-toggle {
+        ul {
+          height: 79%;
+          padding-top: 25px;
+        }
+      }
+
+      .responsive {
+        display: block;
+        float: right;
+        span {
+          transition: 0.5s all;
+          display: block;
+          width: 30px;
+          height: 3px;
+          margin-top: 0.4rem;
+          background: #3f90fc;
+        }
       }
     }
   }

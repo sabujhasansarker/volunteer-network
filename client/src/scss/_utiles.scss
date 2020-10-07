@@ -47,8 +47,24 @@ input {
 .container {
   width: 75%;
   margin: 0 auto;
+
+  @include custom(1050px) {
+    width: 90%;
+  }
 }
 
 ul {
   list-style: none;
+}
+
+// media
+@include tab() {
+  header {
+    // display: none;
+  }
+  .login {
+    &-container {
+      width: 100%;
+    }
+  }
 }
