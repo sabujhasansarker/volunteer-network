@@ -43,6 +43,13 @@ input {
     background: darken(#434141, 10%);
   }
 }
+.bg-e3e3e3 {
+  background: #e3e3e3;
+  color: setBg(#e3e3e3);
+  &:hover {
+    background: darken(#e3e3e3, 10%);
+  }
+}
 
 .container {
   width: 75%;

@@ -40,7 +40,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="ml-40 f-500">
-                  <Link to="/event" className="text-black">
+                  <Link to="/events" className="text-black">
                     Event
                   </Link>
                 </li>

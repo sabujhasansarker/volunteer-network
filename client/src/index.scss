@@ -92,3 +92,25 @@ header {
     }
   }
 }
+
+// event
+.event {
+  &-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 30px 30px;
+    .event-single {
+      display: flex;
+      align-items: flex-start;
+      background: white;
+
+      img {
+        width: 194px;
+      }
+      .event-content {
+        height: 176px;
+      }
+    }
+  }
+}

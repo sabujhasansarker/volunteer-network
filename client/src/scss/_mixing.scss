@@ -73,6 +73,8 @@
   justify-content: $justify;
 }
 
+// Width
+
 @for $i from 1 through 100 {
   .w-#{$i} {
     width: ($i * 1%);
@@ -80,6 +82,14 @@
   }
 }
 
+// width px
+@for $i from 1 through 2000 {
+  .wpx-#{$i } {
+    width: #{$i}px;
+  }
+}
+
+// font weight
 @for $i from 1 through 9 {
   .f-#{$i * 100} {
     font-weight: ($i * 100);
@@ -88,23 +98,15 @@
     }
   }
 }
+
+// font size
 @for $i from 1 through 200 {
   .fs-#{$i } {
     font-size: #{$i}px;
   }
 }
-@for $i from 1 through 100 {
-  .br-#{$i } {
-    border-radius: #{$i}px;
-  }
-}
 
-@each $position in (relative, absolute, fixed) {
-  .p-#{$position} {
-    position: $position;
-  }
-}
-
+// border
 @each $border in (bottom, left, right, top, none) {
   .border {
     border: 1px solid #c5c5c5;
@@ -115,12 +117,76 @@
   }
 }
 
+// border radius
+@for $i from 1 through 100 {
+  .br-#{$i } {
+    border-radius: #{$i}px;
+  }
+}
+
+// position
+@each $position in (relative, absolute, fixed) {
+  .p-#{$position} {
+    position: $position;
+  }
+}
+
+// bottom top left right px
+@for $i from 0 through 1000 {
+  .bpx-#{$i } {
+    bottom: #{$i}px;
+  }
+
+  .tpx-#{$i } {
+    top: #{$i}px;
+  }
+
+  .lpx-#{$i } {
+    left: #{$i}px;
+  }
+
+  .rpx-#{$i } {
+    right: #{$i}px;
+  }
+}
+
+// foate
+@each $float in (left, right, center) {
+  .fo-#{$float} {
+    float: $float;
+  }
+}
+
+// color
 @each $color in (white, black, green, blue) {
   .text-#{$color} {
     color: $color;
   }
 }
 
+// cursor
+@each $cursor
+  in (
+    pointer,
+    default,
+    unset,
+    auto,
+    none,
+    progress,
+    wait,
+    crosshair,
+    cell,
+    text,
+    alias,
+    not-allowed
+  )
+{
+  .cursor-#{$cursor} {
+    cursor: $cursor;
+  }
+}
+
+// bg
 @function setBg($color) {
   @if (lightness($color) > 70) {
     @return #333;
@@ -129,6 +195,7 @@
   }
 }
 
+// media
 @mixin tab() {
   @media (max-width: 769px) {
     @content;
