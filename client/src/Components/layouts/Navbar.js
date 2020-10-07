@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import logo from "../../images/logo.png";
 
 const Navbar = () => {
+  const [scrollPosition, setSrollPosition] = useState(0);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () =>
+      setSrollPosition(window.pageYOffset)
+    );
+  }, []);
   const [toggle, setToggle] = useState(false);
   return (
     <header
-      className={`pt-2 p-fixed ${
-        document.documentElement.scrollTop > 100 ? "stick-nav" : ""
-      }`}
+      className={`pt-2 p-fixed ${scrollPosition > 100 ? "stick-nav" : ""}`}
     >
       <div className="container">
         <nav className="py-20">

@@ -25,8 +25,14 @@ body {
 }
 
 // header
+header.pt-2.p-fixed.stick-nav {
+  background: white;
+  padding: 0px !important;
+  transition: 0.5s all;
+}
 header {
   width: 100%;
+  z-index: 99999999;
 
   nav {
     @include flex(space-between);
@@ -194,7 +200,7 @@ header {
     }
     .content {
       position: relative;
-      margin-top: -12px;
+      margin-top: -90px;
       border-radius: 0 0 10px 10px;
       @include flex(center);
       height: 90px;
