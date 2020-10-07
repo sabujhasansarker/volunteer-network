@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+* {
+  font-family: $montserrat;
+  @include mp-0();
+}
+
+a {
+  color: $a;
+}
+
+.flex {
+  @include flex(unset);
+}
+
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input {
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: black;
+  }
+}

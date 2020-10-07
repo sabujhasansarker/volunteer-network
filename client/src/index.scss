@@ -1,0 +1,22 @@
+@import "./scss/variable";
+@import "./scss/mixing";
+@import "./scss/utiles";
+
+body {
+  background: #e5e5e5;
+}
+
+// login
+.login {
+  &-container {
+    border-radius: 4px;
+    border: 1px solid #ababab;
+    background: white;
+    margin-top: 3rem;
+    min-height: 457px;
+    .google {
+      border: 1px solid #ababab;
+      border-radius: 57px;
+    }
+  }
+}
