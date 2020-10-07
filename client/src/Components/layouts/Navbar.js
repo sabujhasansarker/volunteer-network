@@ -7,7 +7,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   return (
     <header
-      className={`pt-2 ${
+      className={`pt-2 p-fixed ${
         document.documentElement.scrollTop > 100 ? "stick-nav" : ""
       }`}
     >

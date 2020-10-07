@@ -26,6 +26,8 @@ body {
 
 // header
 header {
+  width: 100%;
+
   nav {
     @include flex(space-between);
     @include custom(970px) {
@@ -132,6 +134,70 @@ header {
           height: 150px;
         }
       }
+    }
+  }
+}
+
+// home
+.home {
+  .banner {
+    background: url(./images/banner.png);
+    background-size: cover;
+    &-overlay {
+      background: #ffffffd4;
+    }
+  }
+  form {
+    input[type="text" i] {
+      border-radius: 8px 0 0 8px;
+      border: 1px solid #d6d6d6;
+      border-right: 0;
+      &::placeholder {
+        color: #b0b0b0;
+      }
+      @include custom(866px) {
+        width: unset;
+      }
+      @include custom(400px) {
+        width: 60%;
+      }
+    }
+    input[type="submit" i] {
+      border-radius: 0 8px 8px 0;
+      border: 1px solid #d6d6d6;
+      border-left: 0;
+      @include custom(866px) {
+        width: unset;
+      }
+    }
+  }
+  .card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 30px 30px;
+    margin-top: -132px;
+    @include custom(1024px) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    @include custom(769px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @include custom(426px) {
+      grid-template-columns: 1fr;
+    }
+    a {
+      text-decoration: none;
+    }
+    img {
+      width: 100%;
+    }
+    .content {
+      position: relative;
+      margin-top: -12px;
+      border-radius: 0 0 10px 10px;
+      @include flex(center);
+      height: 90px;
     }
   }
 }

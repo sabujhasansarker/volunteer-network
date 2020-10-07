@@ -7,7 +7,7 @@ import google from "../../images/google.png";
 
 const Login = () => {
   return (
-    <div className="py-50 login">
+    <div className="py-50 login text-center">
       <div className="container">
         <Link to="/" className="logo">
           <img src={logo} alt="Logo" />
