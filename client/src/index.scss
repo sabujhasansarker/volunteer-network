@@ -54,7 +54,7 @@ header {
           z-index: 990;
           height: 0;
           overflow: hidden;
-          transition: 1s all;
+          transition: 0.5s all;
           .ml-40,
           .ml-20 {
             margin-left: 0 !important;
@@ -67,6 +67,9 @@ header {
             margin: 0 auto;
             display: block;
             padding: 0 !important;
+            @include phn() {
+              width: 80%;
+            }
           }
         }
       }
@@ -80,6 +83,7 @@ header {
       .responsive {
         display: block;
         float: right;
+        margin-top: 1rem;
         span {
           transition: 0.5s all;
           display: block;
@@ -100,6 +104,12 @@ header {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 30px 30px;
+    @include phn() {
+      display: block;
+      .event-single {
+        margin-top: 2rem;
+      }
+    }
     .event-single {
       display: flex;
       align-items: flex-start;
@@ -110,6 +120,17 @@ header {
       }
       .event-content {
         height: 176px;
+      }
+      @include custom(895px) {
+        display: block;
+        img {
+          width: 100%;
+        }
+        .ml-23 {
+          margin-left: 0 !important;
+          margin-top: 1rem;
+          height: 150px;
+        }
       }
     }
   }
