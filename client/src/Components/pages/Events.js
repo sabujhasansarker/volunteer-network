@@ -5,6 +5,7 @@ import Navbar from "../layouts/Navbar";
 
 const Events = () => {
   const arr = [1, 2, 3, 4];
+
   return (
     <Fragment>
       <Navbar />
@@ -29,5 +30,4 @@ const Events = () => {
     </Fragment>
   );
 };
-
 export default Events;

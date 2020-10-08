@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -10,8 +10,9 @@ import Admin from "./Components/pages/Admin";
 import AddEvent from "./Components/pages/AddEvent";
 
 import { getUser } from "./action/auth";
+import PrivetRoute from "./Components/layouts/PrivetRoute";
 
-const App = ({ getUser }) => {
+const App = ({ getUser, user }) => {
   useEffect(() => {
     getUser();
   }, []);
@@ -20,14 +21,22 @@ const App = ({ getUser }) => {
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/admin" component={Admin} />
-        <Route exact path="/add-event" component={AddEvent} />
+        <PrivetRoute exact path="/events" component={Events} />
+        {user && user.email === "sabujhasansarker@gmail.com" && (
+          <Fragment>
+            <PrivetRoute exact path="/admin" component={Admin} />
+            <PrivetRoute exact path="/add-event" component={AddEvent} />
+          </Fragment>
+        )}
         <Route exact path="/login" component={Login} />
-        <Route exact path="/registration" component={Register} />
-        <Route exact path="/events" component={Events} />
+        <PrivetRoute exact path="/registration" component={Register} />
       </Switch>
     </Router>
   );
 };
 
-export default connect(null, { getUser })(App);
+const mapstatetoprops = (state) => ({
+  user: state.auth.user,
+});
+
+export default connect(mapstatetoprops, { getUser })(App);

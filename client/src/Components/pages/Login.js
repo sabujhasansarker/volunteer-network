@@ -8,11 +8,11 @@ import logo from "../../images/logo.png";
 import google from "../../images/google.png";
 
 const Login = ({ googleLogin, isAuth }) => {
-  //** useHistory & useLocation for state location */
   let history = useHistory();
   let location = useLocation();
-  const { from } = location.state || { from: { pathname: "/" } };
-  console.log(from);
+
+  let { from } = location.state || { from: { pathname: "/" } };
+
   if (isAuth) {
     history.replace(from);
   }
