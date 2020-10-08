@@ -211,6 +211,7 @@ header {
 // admin
 .admin {
   font-family: "Roboto", sans-serif;
+  background: #f4f7fc;
   &-nav {
     &-top {
       width: 100%;
@@ -245,6 +246,39 @@ header {
               color: #3f90fc;
             }
           }
+        }
+      }
+    }
+  }
+  &-content {
+    padding-top: 120px;
+    padding-left: 340px;
+    min-height: 100vh;
+    padding-right: 60px;
+    table {
+      background: white;
+      thead {
+        tr {
+          background: #f5f6fa;
+          @include flex(space-between);
+        }
+        th {
+          font-weight: 400;
+          font-size: 1rem;
+          color: #686868;
+        }
+      }
+      tbody {
+        .bg-ff444a {
+          background: #ff444a;
+          @include flex(center);
+          height: 30px;
+          &:hover {
+            background: darken(#ff444a, 20%);
+          }
+        }
+        tr {
+          @include flex(space-between);
         }
       }
     }
