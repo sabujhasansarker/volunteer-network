@@ -55,13 +55,13 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="ml-40 f-500">
-                  <Link to="#" className=" bg-3f90fc p-13 br-4">
+                  <Link to="/registration" className=" bg-3f90fc p-13 br-4">
                     Registration
                   </Link>
                 </li>
                 <li className="ml-20 f-500">
                   <Link
-                    to="#"
+                    to="/admin"
                     className=" bg-434141 pt-13 pb-13 pl-30 pr-30 br-4"
                   >
                     Admin
