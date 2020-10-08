@@ -10,7 +10,7 @@ import Admin from "./Components/pages/Admin";
 import AddEvent from "./Components/pages/AddEvent";
 
 import { getUser } from "./action/auth";
-import PrivetRoute from "./Components/layouts/PrivetRoute";
+import PrivateRoute from "./Components/layouts/PrivateRoute";
 import NotFound from "./Components/pages/NotFound";
 
 const App = ({ getUser, user }) => {
@@ -23,14 +23,14 @@ const App = ({ getUser, user }) => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
-        <PrivetRoute exact path="/events" component={Events} />
+        <PrivateRoute exact path="/events" component={Events} />
         {user && user.email === "sabujhasansarker@gmail.com" && (
           <Fragment>
-            <PrivetRoute exact path="/admin" component={Admin} />
-            <PrivetRoute exact path="/add-event" component={AddEvent} />
+            <PrivateRoute exact path="/admin" component={Admin} />
+            <PrivateRoute exact path="/add-event" component={AddEvent} />
           </Fragment>
         )}
-        <PrivetRoute exact path="/registration" component={Register} />
+        <PrivateRoute exact path="/registration" component={Register} />
         <Route component={NotFound} />
       </Switch>
     </Router>

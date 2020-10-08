@@ -32,10 +32,6 @@ const Login = ({ googleLogin, isAuth }) => {
               <img src={google} alt="Google" />
               <p className="text-center w-100 f-500">Continue with Google</p>
             </div>
-            <p className="text-center">
-              Don’t have an account?{" "}
-              <Link to="/registration">Create an account</Link>
-            </p>
           </div>
         </div>
       </div>

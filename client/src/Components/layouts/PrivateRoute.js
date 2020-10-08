@@ -11,18 +11,14 @@ const PrivateRoute = ({ component: Component, isAuth, ...rest }) => {
           <Component {...props} />
         ) : (
           <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: props.location },
-            }}
+            to={{ pathname: "/login", state: { from: props.location } }}
           />
         )
       }
     />
   );
 };
-const mapstatetoprops = (state) => ({
+const mapsatetoprops = (state) => ({
   isAuth: state.auth.isAuth,
 });
-
-export default connect(mapstatetoprops, {})(PrivateRoute);
+export default connect(mapsatetoprops, {})(PrivateRoute);
