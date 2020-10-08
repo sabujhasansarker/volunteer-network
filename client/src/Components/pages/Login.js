@@ -1,11 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
+import { googleLogin } from "../../action/auth";
 // logo
 import logo from "../../images/logo.png";
 import google from "../../images/google.png";
 
-const Login = () => {
+const Login = ({ googleLogin, isAuth }) => {
+  if (isAuth) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className="py-50 login text-center">
       <div className="container">
@@ -15,7 +20,10 @@ const Login = () => {
         <div className="login-container w-40 p-relative p-20">
           <div className="login-content w-100 middle">
             <h1 className="heading">Login With</h1>
-            <div className="google flex w-85 p-5 mt-50 mb-30">
+            <div
+              onClick={() => googleLogin()}
+              className="google flex w-85 p-5 mt-50 mb-30"
+            >
               <img src={google} alt="Google" />
               <p className="text-center w-100 f-500">Continue with Google</p>
             </div>
@@ -30,4 +38,8 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+});
+
+export default connect(mapStateToProps, { googleLogin })(Login);
