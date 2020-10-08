@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 
 import logo from "../../images/logo.png";
 import { connect } from "react-redux";
+import { logOut } from "../../action/auth";
 
-const Navbar = ({ auth: { isAuth, user } }) => {
+const Navbar = ({ auth: { isAuth, user }, logOut }) => {
   const [scrollPosition, setSrollPosition] = useState(0);
 
   useEffect(() => {
@@ -55,18 +56,38 @@ const Navbar = ({ auth: { isAuth, user } }) => {
                     Blog
                   </Link>
                 </li>
-                <li className="ml-40 f-500">
-                  <Link to="/registration" className=" bg-3f90fc p-13 br-4">
-                    Registration
-                  </Link>
-                </li>
-                {isAuth && (
-                  <li className="ml-20 f-500">
+                {user && user.email === "sabujhasansarker@gmail.com" ? (
+                  <li className="ml-40 f-500">
                     <Link
                       to="/admin"
                       className=" bg-434141 pt-13 pb-13 pl-30 pr-30 br-4"
                     >
                       {user && user.displayName}
+                    </Link>
+                  </li>
+                ) : (
+                  user && (
+                    <li className="ml-40">
+                      <Link to="#" className="text-black f-600">
+                        {user && user.displayName}
+                      </Link>
+                    </li>
+                  )
+                )}
+                {isAuth ? (
+                  <li className="ml-20 f-500">
+                    <Link
+                      to="#"
+                      className=" bg-ff444a p-13 br-4"
+                      onClick={() => logOut()}
+                    >
+                      Logout
+                    </Link>
+                  </li>
+                ) : (
+                  <li className="ml-20 f-500">
+                    <Link to="/login" className=" bg-3f90fc p-13 br-4">
+                      Login
                     </Link>
                   </li>
                 )}
@@ -82,4 +103,4 @@ const Navbar = ({ auth: { isAuth, user } }) => {
 const mapstatetoprops = (state) => ({
   auth: state.auth,
 });
-export default connect(mapstatetoprops, {})(Navbar);
+export default connect(mapstatetoprops, { logOut })(Navbar);

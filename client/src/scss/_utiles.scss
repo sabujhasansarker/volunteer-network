@@ -59,6 +59,14 @@ textarea {
   }
 }
 
+.bg-ff444a {
+  background: #ff444a;
+  color: setBg(#ff444a);
+  &:hover {
+    background: darken(#ff444a, 20%);
+  }
+}
+
 .container {
   width: 75%;
   margin: 0 auto;

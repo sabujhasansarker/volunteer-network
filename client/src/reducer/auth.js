@@ -1,4 +1,4 @@
-import { GET_USER } from "../action/type";
+import { GET_USER, USER_ERROR } from "../action/type";
 
 const initialState = {
   user: null,
@@ -15,6 +15,12 @@ export default (state = initialState, action) => {
         user: payload,
         loading: false,
         isAuth: true,
+      };
+    case USER_ERROR:
+      return {
+        ...state,
+        user: payload,
+        isAuth: false,
       };
     default:
       return state;

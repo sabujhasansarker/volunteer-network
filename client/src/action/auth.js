@@ -1,14 +1,13 @@
-import { GET_USER } from "./type";
+import { GET_USER, USER_ERROR } from "./type";
 import { google, auth } from "../config/firebase";
 
 export const getUser = () => async (dispatch) => {
   try {
     auth.onAuthStateChanged((user) => {
       dispatch({
-        type: GET_USER,
-        payload: user.providerData[0],
+        type: user ? GET_USER : USER_ERROR,
+        payload: user ? user.providerData[0] : null,
       });
-      console.log(user.providerData[0]);
     });
   } catch (err) {
     console.log(err.message);
@@ -18,6 +17,16 @@ export const getUser = () => async (dispatch) => {
 export const googleLogin = () => async (dispatch) => {
   try {
     await auth.signInWithPopup(google);
+    dispatch(getUser());
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const logOut = () => async (dispatch) => {
+  console.log("logout");
+  try {
+    await auth.signOut();
     dispatch(getUser());
   } catch (err) {
     console.log(err.message);
