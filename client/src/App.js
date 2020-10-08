@@ -11,6 +11,7 @@ import AddEvent from "./Components/pages/AddEvent";
 
 import { getUser } from "./action/auth";
 import PrivetRoute from "./Components/layouts/PrivetRoute";
+import NotFound from "./Components/pages/NotFound";
 
 const App = ({ getUser, user }) => {
   useEffect(() => {
@@ -21,6 +22,7 @@ const App = ({ getUser, user }) => {
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
         <PrivetRoute exact path="/events" component={Events} />
         {user && user.email === "sabujhasansarker@gmail.com" && (
           <Fragment>
@@ -28,8 +30,8 @@ const App = ({ getUser, user }) => {
             <PrivetRoute exact path="/add-event" component={AddEvent} />
           </Fragment>
         )}
-        <Route exact path="/login" component={Login} />
         <PrivetRoute exact path="/registration" component={Register} />
+        <Route component={NotFound} />
       </Switch>
     </Router>
   );
