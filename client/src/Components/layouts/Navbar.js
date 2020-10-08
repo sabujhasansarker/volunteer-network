@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import logo from "../../images/logo.png";
+import { connect } from "react-redux";
 
-const Navbar = () => {
+const Navbar = ({ auth: { isAuth, user } }) => {
   const [scrollPosition, setSrollPosition] = useState(0);
 
   useEffect(() => {
@@ -59,14 +60,16 @@ const Navbar = () => {
                     Registration
                   </Link>
                 </li>
-                <li className="ml-20 f-500">
-                  <Link
-                    to="/admin"
-                    className=" bg-434141 pt-13 pb-13 pl-30 pr-30 br-4"
-                  >
-                    Admin
-                  </Link>
-                </li>
+                {isAuth && (
+                  <li className="ml-20 f-500">
+                    <Link
+                      to="/admin"
+                      className=" bg-434141 pt-13 pb-13 pl-30 pr-30 br-4"
+                    >
+                      {user && user.displayName}
+                    </Link>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -76,4 +79,7 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapstatetoprops = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapstatetoprops, {})(Navbar);

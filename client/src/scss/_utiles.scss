@@ -4,10 +4,14 @@
 * {
   @include mp-0();
 }
-body {
+body,
+input {
   font-family: $montserrat;
 }
 
+input:disabled {
+  background: none;
+}
 a {
   color: $a;
 }

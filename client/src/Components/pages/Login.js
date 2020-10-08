@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { googleLogin } from "../../action/auth";
@@ -8,8 +8,13 @@ import logo from "../../images/logo.png";
 import google from "../../images/google.png";
 
 const Login = ({ googleLogin, isAuth }) => {
+  //** useHistory & useLocation for state location */
+  let history = useHistory();
+  let location = useLocation();
+  const { from } = location.state || { from: { pathname: "/" } };
+  console.log(from);
   if (isAuth) {
-    return <Redirect to="/" />;
+    history.replace(from);
   }
   return (
     <div className="py-50 login text-center">

@@ -1,10 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 
 // logo
 import logo from "../../images/logo.png";
+import { connect } from "react-redux";
 
-const Registration = () => {
+const Registration = ({ auth: { user, isAuth } }) => {
+  if (!isAuth) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className="py-50 login text-center">
       <div className="container">
@@ -24,6 +28,8 @@ const Registration = () => {
                     type="text"
                     name="fullName"
                     placeholder="Full Name"
+                    value={user && user.displayName}
+                    disabled
                   />
                 </div>
               </div>
@@ -34,6 +40,8 @@ const Registration = () => {
                     type="email"
                     name="email"
                     placeholder="Username or Email"
+                    value={user && user.email}
+                    disabled
                   />
                 </div>
               </div>
@@ -44,6 +52,8 @@ const Registration = () => {
                     type="date"
                     name="date"
                     placeholder="Date"
+                    value={new Date().toISOString().slice(0, 10)}
+                    disabled
                   />
                 </div>
               </div>
@@ -84,4 +94,8 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+const mapstatetoprops = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapstatetoprops, {})(Registration);
