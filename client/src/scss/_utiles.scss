@@ -23,7 +23,8 @@ a {
   transform: translate(-50%, -50%);
 }
 
-input {
+input,
+textarea {
   &:focus {
     outline: none;
   }

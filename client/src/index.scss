@@ -356,5 +356,51 @@ header {
         }
       }
     }
+
+    // form
+    form {
+      .form-container {
+        background: white;
+      }
+      .form-group {
+        @include flex(unset);
+        align-items: flex-start;
+        .form-item {
+          label {
+            display: block;
+          }
+          input {
+            height: 40px;
+          }
+          textarea#description {
+            height: 141px;
+            resize: none;
+          }
+          input,
+          textArea,
+          input#date {
+            border-color: #c9c9c9;
+            font-family: "Roboto", sans-serif;
+            &::placeholder {
+              color: #c9c9c9;
+              font-size: 1rem;
+              font-family: "Roboto", sans-serif;
+            }
+          }
+          .banner {
+            @include flex(unset);
+            border: 1px solid #0084ff;
+            height: 40px;
+            padding: 0 24px;
+            background: #e5f3ff;
+            color: #0084ff;
+            cursor: pointer;
+          }
+          input#banner {
+            opacity: 0;
+          }
+        }
+      }
+    }
   }
 }
