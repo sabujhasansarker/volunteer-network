@@ -14,22 +14,24 @@ const Admin = () => {
           <table className="br-13 w-100 p-10 pb-50">
             <thead>
               <tr className="br-13 pt-18 pb-18 pl-33 pr-33">
-                <th>Name</th>
-                <th>Email ID</th>
-                <th>Registating date</th>
-                <th>Volunteer list</th>
-                <th>Actions</th>
+                <th className="w-20">Name</th>
+                <th className="w-20">Email ID</th>
+                <th className="w-20">Registating date</th>
+                <th className="w-34">Volunteer list</th>
+                <th className="w-6 text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
               {table.map((t, i) => (
                 <tr key={i} className=" pt-21  pl-33 pr-33">
-                  <td>Sufi Ahmed Hamim</td>
-                  <td>sufi@gmail.com</td>
-                  <td>22-10-2020</td>
-                  <td>Organize books at the library.</td>
-                  <td className="bg-ff444a br-4 wpx-30 cursor-pointer">
-                    <img src={deleteImage} alt="" />
+                  <td className="w-20">Sufi Ahmed Hamim</td>
+                  <td className="w-20">sufi@gmail.com</td>
+                  <td className="w-20">22-10-2020</td>
+                  <td className="w-34">Organize books at the library.</td>
+                  <td className="w-6">
+                    <div className="image-container  bg-ff444a br-4 wpx-30 cursor-pointer">
+                      <img src={deleteImage} alt="" />
+                    </div>
                   </td>
                 </tr>
               ))}

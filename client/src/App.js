@@ -11,6 +11,7 @@ import Register from "./Components/pages/Register";
 import Events from "./Components/pages/Events";
 import Home from "./Components/pages/Home";
 import Admin from "./Components/pages/Admin";
+import AddEvent from "./Components/pages/AddEvent";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/admin" component={Admin} />
+          <Route exact path="/add-event" component={AddEvent} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/registration" component={Register} />
           <Route exact path="/events" component={Events} />

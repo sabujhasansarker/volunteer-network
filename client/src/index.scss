@@ -293,6 +293,7 @@ header {
           a {
             color: unset;
             text-decoration: none;
+            @include flex(unset);
             &:hover {
               color: #3f90fc;
             }
@@ -319,11 +320,13 @@ header {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
+        .w-20 {
+          width: 200px !important;
+        }
       }
       thead {
         tr {
           background: #f5f6fa;
-          @include flex(space-between);
         }
         th {
           font-weight: 400;
@@ -331,17 +334,25 @@ header {
           color: #686868;
         }
       }
+      tr {
+        @include flex(unset);
+        td,
+        th {
+          text-align: left;
+        }
+        .text-right {
+          text-align: right;
+        }
+      }
       tbody {
         .bg-ff444a {
           background: #ff444a;
           @include flex(center);
           height: 30px;
+          margin: 0 auto;
           &:hover {
             background: darken(#ff444a, 20%);
           }
-        }
-        tr {
-          @include flex(space-between);
         }
       }
     }
