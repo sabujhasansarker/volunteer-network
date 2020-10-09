@@ -31,3 +31,12 @@ exports.addUser = async (req, res) => {
     error(res, err);
   }
 };
+
+exports.deleteVolunteer = async (req, res) => {
+  try {
+    await Volunteer.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Delete volunteer" });
+  } catch (err) {
+    error(res, err);
+  }
+};
