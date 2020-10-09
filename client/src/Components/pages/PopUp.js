@@ -6,18 +6,32 @@ import { storage } from "../../config/firebase";
 
 import { addEvent } from "../../action/event";
 
-const PopUp = ({ banner, title, description, onClick, file, addEvent }) => {
+const PopUp = ({
+   banner,
+   title,
+   description,
+   submitData,
+   onClick,
+   file,
+   addEvent,
+   one,
+}) => {
    const date = new Date();
+   const math = Math.random();
    const onSubmit = () => {
       storage
          .ref()
-         .child(`/images/${file.name}`)
+         .child(`/images/${file.name + math}`)
          .put(file)
          .on("state_changed", async (snap) => {
-            const url = await storage
-               .ref(`/images/${file.name}`)
+            const banner = await storage
+               .ref(`/images/${file.name + math}`)
                .getDownloadURL();
-            addEvent({ banner: { url }, title, description, date });
+            if (!one) {
+               addEvent({ banner, title, description, date });
+               onClick();
+               submitData();
+            }
          });
    };
 

@@ -17,6 +17,7 @@ const AddEvent = () => {
    const [popUp, setPopUp] = useState(false);
    const [alert, setAlert] = useState(null);
    const [file, setFile] = useState(null);
+   const [one, setOne] = useState(false);
    const { title, description, date, banner } = formData;
    const onChange = (e) =>
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,7 +26,6 @@ const AddEvent = () => {
       const reader = new FileReader();
       const fileName = e.target.files[0];
       reader.readAsDataURL(fileName);
-      console.log(fileName);
       if (fileName) {
          if (fileName.type === "image/png" || fileName.type === "image/jpeg") {
             reader.onloadend = (e) => {
@@ -43,6 +43,7 @@ const AddEvent = () => {
       e.preventDefault();
       if (title && banner && description && date) {
          setPopUp(true);
+         setOne(false);
       } else {
          setAlert("All field are required *");
          clearAlert();
@@ -60,12 +61,23 @@ const AddEvent = () => {
          {popUp && (
             <PopUp
                banner={banner}
-               tittle={title}
+               title={title}
                description={description}
                setPopUp={setPopUp}
                popUp={popUp}
                file={file}
+               one={one}
                onClick={() => setPopUp(false)}
+               submitData={() => {
+                  setFormData({
+                     title: "",
+                     description: "",
+                     date: new Date(),
+                     banner: "",
+                  });
+                  setPopUp(false);
+                  setOne(false);
+               }}
             />
          )}
          <div className="admin ">
