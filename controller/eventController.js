@@ -38,3 +38,12 @@ exports.deleteEvent = async (req, res) => {
       error(res, err);
    }
 };
+
+exports.searchEvent = async (req, res) => {
+   try {
+      const event = await Event.find({ $text: { $search: req.body.text } });
+      res.json(event);
+   } catch (err) {
+      error(res, err);
+   }
+};
