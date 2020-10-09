@@ -39,7 +39,7 @@ const AddEvent = ({ addEvent }) => {
 
    return (
       <Fragment>
-         {popUp && (
+         {!popUp && (
             <PopUp
                banner={banner}
                tittle={title}
