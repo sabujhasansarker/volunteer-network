@@ -14,8 +14,8 @@ const volunteerSchema = new Schema({
     required: true,
   },
   event: {
-    id: Schema.Types.ObjectId,
-    ref: "Events",
+    type: Schema.Types.ObjectId,
+    ref: "Event",
   },
   date: {
     type: String,

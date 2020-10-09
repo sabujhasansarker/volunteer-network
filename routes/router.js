@@ -1,8 +1,15 @@
 const event = require("./event");
+
+const volunteer = require("./volunteer");
+
 const routers = [
   {
     path: "/event",
     hedelar: event,
+  },
+  {
+    path: "/",
+    hedelar: volunteer,
   },
 ];
 
