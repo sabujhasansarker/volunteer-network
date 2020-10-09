@@ -1,9 +1,26 @@
 import React from "react";
 import moment from "moment";
+import { connect } from "react-redux";
 
-import card from "../../images/card.png";
+import { storage } from "../../config/firebase";
 
-const PopUp = ({ banner, title, description, onClick }) => {
+import { addEvent } from "../../action/event";
+
+const PopUp = ({ banner, title, description, onClick, file, addEvent }) => {
+   const date = new Date();
+   const onSubmit = () => {
+      storage
+         .ref()
+         .child(`/images/${file.name}`)
+         .put(file)
+         .on("state_changed", async (snap) => {
+            const url = await storage
+               .ref(`/images/${file.name}`)
+               .getDownloadURL();
+            addEvent({ banner: { url }, title, description, date });
+         });
+   };
+
    return (
       <div className="popup position-relative">
          <div className="popup-container middle">
@@ -17,11 +34,11 @@ const PopUp = ({ banner, title, description, onClick }) => {
             </p>
             <p className=" fs-16 date">
                <span className="f-500 mr-7 fs-18">Created At : </span>
-               {moment(new Date()).format("DD-MM-YY")}
+               {moment(date).format("DD-MM-YY")}
             </p>
             <div className="flex">
                <button
-                  onClick={onClick}
+                  onClick={() => onSubmit()}
                   className="br-5 p-15 f-500 fs-16 bg-3f90fc border-none wpx-100"
                >
                   Submit
@@ -38,4 +55,4 @@ const PopUp = ({ banner, title, description, onClick }) => {
    );
 };
 
-export default PopUp;
+export default connect(null, { addEvent })(PopUp);

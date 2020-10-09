@@ -1,16 +1,13 @@
 import React, { Fragment, useState } from "react";
 
-import { connect } from "react-redux";
-
 import AdminNav from "../layouts/AdminNav";
 
 import upload from "../../images/upload.png";
 
-import { addEvent } from "../../action/event";
 import moment from "moment";
 import PopUp from "./PopUp";
 
-const AddEvent = ({ addEvent }) => {
+const AddEvent = () => {
    const [formData, setFormData] = useState({
       title: "",
       description: "",
@@ -19,19 +16,21 @@ const AddEvent = ({ addEvent }) => {
    });
    const [popUp, setPopUp] = useState(false);
    const [alert, setAlert] = useState(null);
+   const [file, setFile] = useState(null);
    const { title, description, date, banner } = formData;
    const onChange = (e) =>
       setFormData({ ...formData, [e.target.name]: e.target.value });
 
    const fileChange = (e) => {
       const reader = new FileReader();
-      const file = e.target.files[0];
-      reader.readAsDataURL(file);
-      console.log(file);
-      if (file) {
-         if (file.type === "image/png" || file.type === "image/jpeg") {
+      const fileName = e.target.files[0];
+      reader.readAsDataURL(fileName);
+      console.log(fileName);
+      if (fileName) {
+         if (fileName.type === "image/png" || fileName.type === "image/jpeg") {
             reader.onloadend = (e) => {
                setFormData({ ...formData, banner: reader.result });
+               setFile(fileName);
             };
          } else {
             setAlert("Your file must me png / jpeg");
@@ -65,6 +64,7 @@ const AddEvent = ({ addEvent }) => {
                description={description}
                setPopUp={setPopUp}
                popUp={popUp}
+               file={file}
                onClick={() => setPopUp(false)}
             />
          )}
@@ -161,4 +161,4 @@ const AddEvent = ({ addEvent }) => {
    );
 };
 
-export default connect(null, { addEvent })(AddEvent);
+export default AddEvent;
