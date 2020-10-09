@@ -18,38 +18,64 @@ const AddEvent = ({ addEvent }) => {
       banner: null,
    });
    const [popUp, setPopUp] = useState(false);
+   const [alert, setAlert] = useState(null);
    const { title, description, date, banner } = formData;
    const onChange = (e) =>
       setFormData({ ...formData, [e.target.name]: e.target.value });
 
    const fileChange = (e) => {
       const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onloadend = (e) => {
-         setFormData({ ...formData, banner: reader.result });
-      };
+      const file = e.target.files[0];
+      reader.readAsDataURL(file);
+      console.log(file);
+      if (file) {
+         if (file.type === "image/png" || file.type === "image/jpeg") {
+            reader.onloadend = (e) => {
+               setFormData({ ...formData, banner: reader.result });
+            };
+         } else {
+            setAlert("Your file must me png / jpeg");
+            clearAlert();
+         }
+      }
    };
 
    const onSubmit = (e) => {
       e.preventDefault();
       if (title && banner && description && date) {
          setPopUp(true);
+      } else {
+         setAlert("All field are required *");
+         clearAlert();
       }
+   };
+
+   const clearAlert = () => {
+      setTimeout(() => {
+         setAlert(null);
+      }, 1000);
    };
 
    return (
       <Fragment>
-         {!popUp && (
+         {popUp && (
             <PopUp
                banner={banner}
                tittle={title}
                description={description}
                setPopUp={setPopUp}
+               popUp={popUp}
+               onClick={() => setPopUp(false)}
             />
          )}
          <div className="admin ">
             <AdminNav addEvent={true} />
             <div className="admin-content pb-100">
+               {alert && (
+                  <div className="alert br-5 mb-20 text-center p-15 bg-ff444a f-500">
+                     <p>{alert}</p>
+                  </div>
+               )}
                <form onSubmit={(e) => onSubmit(e)}>
                   <div className="form-container br-15 p-24">
                      <div className="form-group">
@@ -125,7 +151,7 @@ const AddEvent = ({ addEvent }) => {
                      <input
                         type="submit"
                         value="Submit"
-                        className=" border-none p-12 pl-30 pr-30 text-center f-500 fs-16 br-5 bg-3f90fc"
+                        className=" border-none p-12 pl-30 pr-30 text-center f-500 fs-16 br-5 bg-3f90fc cursor-pointer"
                      />
                   </div>
                </form>
