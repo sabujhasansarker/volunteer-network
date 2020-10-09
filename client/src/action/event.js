@@ -19,6 +19,18 @@ export const addEvent = (data) => async (dispatch) => {
    }
 };
 
+export const searchEvents = (data) => async (dispatch) => {
+   try {
+      const res = await Axios.get(`/event/${data}`);
+      dispatch({
+         type: GET_EVENT,
+         payload: res.data,
+      });
+   } catch (err) {
+      console.log(err.message);
+   }
+};
+
 export const getEvent = () => async (dispatch) => {
    try {
       const res = await Axios.get("/event");

@@ -1,10 +1,15 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useRef } from "react";
 import Card from "./Card";
 import Navbar from "../layouts/Navbar";
 import { connect } from "react-redux";
 
-const Home = ({ events }) => {
-   console.log(events);
+import { searchEvents } from "../../action/event";
+
+const Home = ({ events, searchEvents }) => {
+   const search = useRef("");
+   const onChange = (e) => {
+      search.current = e.target.value;
+   };
    return (
       <Fragment>
          <Navbar />
@@ -15,13 +20,22 @@ const Home = ({ events }) => {
                      <h1 className="text-center f-700 fs-34">
                         I grow by helping people in need.
                      </h1>
-                     <form action="" className="form text-center mt-26">
+                     <form
+                        action=""
+                        className="form text-center mt-26"
+                        onSubmit={(e) => {
+                           e.preventDefault();
+                           searchEvents(search.current);
+                        }}
+                     >
                         <div className="form-group">
                            <div className="form-item">
                               <input
                                  type="text"
                                  className="p-15 w-33 fs-16 f-500"
                                  placeholder="Search...."
+                                 ref={search}
+                                 onChange={onChange}
                               />
                               <input
                                  type="submit"
@@ -51,4 +65,4 @@ const mapstatetoprops = (state) => ({
    events: state.event.events,
 });
 
-export default connect(mapstatetoprops, {})(Home);
+export default connect(mapstatetoprops, { searchEvents })(Home);

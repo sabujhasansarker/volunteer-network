@@ -11,7 +11,7 @@ router.post("/", addEvent);
 
 router.get("/", getEvents);
 
-router.get("/search", searchEvent);
+router.get("/:text", searchEvent);
 
 router.delete("/:id", deleteEvent);
 

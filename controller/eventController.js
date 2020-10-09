@@ -40,8 +40,9 @@ exports.deleteEvent = async (req, res) => {
 };
 
 exports.searchEvent = async (req, res) => {
+   console.log(req.body);
    try {
-      const event = await Event.find({ $text: { $search: req.body.text } });
+      const event = await Event.find({ $text: { $search: req.params.text } });
       res.json(event);
    } catch (err) {
       error(res, err);
