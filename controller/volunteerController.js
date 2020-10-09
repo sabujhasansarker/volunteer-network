@@ -1,5 +1,7 @@
 const Volunteer = require("../models/Volunteer");
 
+const { error } = require("../utilities/error");
+
 exports.getUser = async (req, res) => {
   try {
     const volunteers = await Volunteer.find();
@@ -10,10 +12,13 @@ exports.getUser = async (req, res) => {
       return res.status(404).json({ message: "Volunteer is empty" });
     }
   } catch (err) {
-    return res.json(err.message);
+    error(res, err);
   }
 };
 
 exports.addUser = async (req, res) => {
-  tryc;
+  try {
+  } catch (err) {
+    error(res, err);
+  }
 };

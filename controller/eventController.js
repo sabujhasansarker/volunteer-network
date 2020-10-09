@@ -1,4 +1,5 @@
 const Event = require("../models/Events");
+const { error } = require("../utilities/error");
 
 exports.getEvents = async (req, res) => {
   try {
@@ -9,7 +10,7 @@ exports.getEvents = async (req, res) => {
       return res.status(404).json({ message: "Event not found" });
     }
   } catch (err) {
-    return res.json(err.message);
+    error(res, err);
   }
 };
 
@@ -25,7 +26,7 @@ exports.addEvent = async (req, res) => {
     await newEvent.save();
     return res.json(newEvent);
   } catch (err) {
-    return res.json(err.message);
+    error(res, err);
   }
 };
 
@@ -34,6 +35,6 @@ exports.deleteEvent = async (req, res) => {
     await Event.findByIdAndDelete(req.params.id);
     return res.json({ message: "Event deleted" });
   } catch (err) {
-    return res.json(err.message);
+    error(res, err);
   }
 };
