@@ -1,6 +1,7 @@
 const Volunteer = require("../models/Volunteer");
 
 const { error } = require("../utilities/error");
+const Events = require("../models/Events");
 
 exports.getUser = async (req, res) => {
   try {
@@ -17,6 +18,11 @@ exports.getUser = async (req, res) => {
 
 exports.addUser = async (req, res) => {
   try {
+    const event = await Events.findOne({ id: req.params.id });
+
+    if (!event) {
+      return res.status(404).json({ message: "Your Events not found" });
+    }
     const { name, email, description, date } = req.body;
     const newVolunteer = new Volunteer({
       name,
@@ -34,6 +40,12 @@ exports.addUser = async (req, res) => {
 
 exports.deleteVolunteer = async (req, res) => {
   try {
+    const volunteer = await Volunteer.findOne({ id: req.params.id });
+
+    if (!volunteer) {
+      return res.status(404).json({ message: "Your Volunteer not found" });
+    }
+
     await Volunteer.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Delete volunteer" });
   } catch (err) {
