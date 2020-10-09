@@ -8,7 +8,7 @@ middleares(app);
 const routers = require("./routes/router");
 routers(app);
 
-// Database connacted
+// Database connected
 const connectDB = require("./config/db");
 connectDB();
 
