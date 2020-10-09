@@ -4,8 +4,7 @@ const { error } = require("../utilities/error");
 
 exports.getUser = async (req, res) => {
   try {
-    const volunteers = await Volunteer.find();
-    console.log(volunteers.length);
+    const volunteers = await Volunteer.find().populate("event").exec();
     if (volunteers.length !== 0) {
       return res.status(200).json(volunteers);
     } else {
@@ -18,6 +17,16 @@ exports.getUser = async (req, res) => {
 
 exports.addUser = async (req, res) => {
   try {
+    const { name, email, description, date } = req.body;
+    const newVolunteer = new Volunteer({
+      name,
+      email,
+      description,
+      date,
+      event: req.params.id,
+    });
+    await newVolunteer.save();
+    return res.status(200).json(newVolunteer);
   } catch (err) {
     error(res, err);
   }
