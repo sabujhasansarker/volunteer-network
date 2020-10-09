@@ -30,7 +30,7 @@ const App = ({ getUser, user }) => {
             <PrivateRoute exact path="/add-event" component={AddEvent} />
           </Fragment>
         )}
-        <PrivateRoute exact path="/registration" component={Register} />
+        <PrivateRoute exact path="/registration/:id" component={Register} />
         <Route component={NotFound} />
       </Switch>
     </Router>

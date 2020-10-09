@@ -1,4 +1,10 @@
-const routers = [];
+const event = require("./event");
+const routers = [
+  {
+    path: "/event",
+    hedelar: event,
+  },
+];
 
 module.exports = (app) => {
   routers.forEach((router) => {

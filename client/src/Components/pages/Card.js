@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 
 const Card = () => {
   return (
-    <Link to="/" className="single-card br-10">
+    <Link
+      to={`/registration/${Math.floor(Math.random() * 100)}`}
+      className="single-card br-10"
+    >
       <img src={card} alt="" />
       <div
         className="content"
