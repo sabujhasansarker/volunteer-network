@@ -9,7 +9,9 @@ import PopUp from "./PopUp";
 import deleteImage from "../../images/delete.png";
 import { connect } from "react-redux";
 
-const AddEvent = ({ events }) => {
+import { deleteEvent } from "../../action/event";
+
+const AddEvent = ({ events, deleteEvent }) => {
    const [formData, setFormData] = useState({
       title: "",
       description: "",
@@ -202,7 +204,12 @@ const AddEvent = ({ events }) => {
                                  />
                               </td>
                               <td className="w-6">
-                                 <div className="image-container  bg-ff444a br-4 wpx-30 cursor-pointer">
+                                 <div
+                                    className="image-container  bg-ff444a br-4 wpx-30 cursor-pointer"
+                                    onClick={() =>
+                                       deleteEvent(event._id, event.banner)
+                                    }
+                                 >
                                     <img src={deleteImage} alt="" />
                                  </div>
                               </td>
@@ -220,4 +227,4 @@ const mapstatetoprops = (state) => ({
    events: state.event.events,
 });
 
-export default connect(mapstatetoprops, {})(AddEvent);
+export default connect(mapstatetoprops, { deleteEvent })(AddEvent);

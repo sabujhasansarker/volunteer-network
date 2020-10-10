@@ -1,5 +1,7 @@
 import Axios from "axios";
-import { ADD_EVENT, GET_EVENT, GET_SINGLE } from "./type";
+import { ADD_EVENT, GET_EVENT, GET_SINGLE, DELETE_EVENT } from "./type";
+
+import { storage } from "../config/firebase";
 
 const config = {
    headers: {
@@ -52,6 +54,21 @@ export const getSingleEvent = (data) => (dispatch) => {
 
 export const deleteEvent = (id, image) => (dispatch) => {
    try {
+      // Create a reference to the file to delete
+      var desertRef = storage.refFromURL(image);
+      console.log(desertRef);
+      desertRef
+         .delete()
+         .then(async () => {
+            await Axios.delete(`/event/${id}`);
+            dispatch({
+               type: DELETE_EVENT,
+               payload: id,
+            });
+         })
+         .catch((err) => {
+            console.log(err);
+         });
    } catch (err) {
       console.log(err.message);
    }
