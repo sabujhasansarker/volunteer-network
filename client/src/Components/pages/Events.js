@@ -14,13 +14,20 @@ const Events = ({ volunteer }) => {
             <div className="container">
                <div className="event-container">
                   {volunteer &&
-                     volunteer.map((event, i) => (
+                     volunteer.map((volunteer, i) => (
                         <div className="event-single p-24 br-10" key={i}>
-                           <img src={event.banner} alt={event.title} />
+                           <img
+                              src={volunteer.event && volunteer.event.banner}
+                              alt={volunteer.event && volunteer.event.title}
+                           />
                            <div className="event-content w-100 ml-23 p-relative">
-                              <h2 className="f-900 fs-24 ">{event.title}</h2>
+                              <h2 className="f-900 fs-24 ">
+                                 {volunteer.event && volunteer.event.title}
+                              </h2>
                               <p className="f-500 mt-10">
-                                 {moment(event.date).format("ll")}
+                                 {moment(
+                                    volunteer.event && volunteer.event.date
+                                 ).format("ll")}
                               </p>
                               <p className="pt-13 pb-13 pl-41 pr-41 text-center br-5 bg-e3e3e3 cursor-pointer wpx-131  p-absolute bpx-0 rpx-0 ">
                                  Cancel

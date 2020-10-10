@@ -5,7 +5,10 @@ const Events = require("../models/Events");
 
 exports.getUser = async (req, res) => {
    try {
-      const volunteers = await Volunteer.find().populate("event").exec();
+      const volunteers = await Volunteer.find()
+         .sort({ date: -1 })
+         .populate("event")
+         .exec();
       if (volunteers.length !== 0) {
          return res.status(200).json(volunteers);
       } else {
@@ -62,6 +65,7 @@ exports.deleteVolunteer = async (req, res) => {
 exports.getEventByUser = async (req, res) => {
    try {
       const volunteers = await Volunteer.find({ email: req.params.email })
+         .sort({ date: -1 })
          .populate("event")
          .exec();
       if (volunteers.length !== 0) {

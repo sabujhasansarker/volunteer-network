@@ -29,7 +29,7 @@ const App = ({
       !user && getUser();
       events.length <= 0 && getEvent();
       volunteers.length <= 0 && getVolunteer();
-      volunteer.length <= 0 && getSingleVolunteer(user && user.email);
+      user && volunteer.length <= 0 && getSingleVolunteer(user && user.email);
    }, [volunteers]);
 
    return (
