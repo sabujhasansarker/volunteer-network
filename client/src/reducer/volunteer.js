@@ -3,6 +3,7 @@ import {
    GET_VOLUNTEER,
    VOLUNTEER,
    ERROR_VOLUNTEER,
+   DELETE_VOLUNTEER,
 } from "../action/type";
 
 const initialState = {
@@ -32,6 +33,11 @@ export default (state = initialState, action) => {
          return {
             ...state,
             volunteer: [],
+         };
+      case DELETE_VOLUNTEER:
+         return {
+            ...state,
+            volunteer: state.volunteer.filter((v) => v._id !== payload && v),
          };
       default:
          return state;

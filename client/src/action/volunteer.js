@@ -4,6 +4,7 @@ import {
    GET_VOLUNTEER,
    VOLUNTEER,
    ERROR_VOLUNTEER,
+   DELETE_VOLUNTEER,
 } from "./type";
 
 const config = {
@@ -54,4 +55,13 @@ export const getSingleVolunteer = (email) => async (dispatch) => {
 
 export const deleteVolunteer = (id) => async (dispatch) => {
    console.log(id);
+   try {
+      await Axios.delete(`/volunteer/${id}`);
+      dispatch({
+         type: DELETE_VOLUNTEER,
+         payload: id,
+      });
+   } catch (err) {
+      console.log(err.message);
+   }
 };

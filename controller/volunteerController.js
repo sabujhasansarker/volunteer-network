@@ -49,7 +49,7 @@ exports.addUser = async (req, res) => {
 
 exports.deleteVolunteer = async (req, res) => {
    try {
-      const volunteer = await Volunteer.findOne({ id: req.params.id });
+      const volunteer = await Volunteer.findOne({ _id: req.params.id });
 
       if (!volunteer) {
          return res.status(404).json({ message: "Your Volunteer not found" });

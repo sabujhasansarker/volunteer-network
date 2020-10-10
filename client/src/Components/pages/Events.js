@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 
 import moment from "moment";
 
-const Events = ({ volunteer }) => {
-   console.log(volunteer);
+import { deleteVolunteer } from "../../action/volunteer";
+
+const Events = ({ volunteer, deleteVolunteer }) => {
    return (
       <Fragment>
          <Navbar />
@@ -29,7 +30,10 @@ const Events = ({ volunteer }) => {
                                     volunteer.event && volunteer.event.date
                                  ).format("ll")}
                               </p>
-                              <p className="pt-13 pb-13 pl-41 pr-41 text-center br-5 bg-e3e3e3 cursor-pointer wpx-131  p-absolute bpx-0 rpx-0 ">
+                              <p
+                                 onClick={() => deleteVolunteer(volunteer._id)}
+                                 className="pt-13 pb-13 pl-41 pr-41 text-center br-5 bg-e3e3e3 cursor-pointer wpx-131  p-absolute bpx-0 rpx-0 "
+                              >
                                  Cancel
                               </p>
                            </div>
@@ -46,4 +50,4 @@ const mapstatetoprops = (state) => ({
    volunteer: state.volunteer.volunteer,
 });
 
-export default connect(mapstatetoprops, {})(Events);
+export default connect(mapstatetoprops, { deleteVolunteer })(Events);
