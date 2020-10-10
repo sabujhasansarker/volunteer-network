@@ -61,7 +61,7 @@ exports.deleteVolunteer = async (req, res) => {
 
 exports.getEventByUser = async (req, res) => {
    try {
-      const volunteers = await Volunteer.findById(req.params.id)
+      const volunteers = await Volunteer.find({ email: req.params.email })
          .populate("event")
          .exec();
       if (volunteers.length !== 0) {

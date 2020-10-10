@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 // logo
@@ -23,9 +23,10 @@ const Registration = ({
          getSingleEvent(match.params.id);
       }
       setActive(
-         volunteers.find(
-            (vo) => vo.event && vo.event._id == match.params.id && vo.event
-         )
+         volunteers &&
+            volunteers.find(
+               (vo) => vo.event && vo.event._id == match.params.id && vo.event
+            )
       );
    }, [volunteers]);
 
@@ -60,6 +61,7 @@ const Registration = ({
          },
          match.params.id
       );
+      return <Redirect to="/events" />;
    };
 
    return (

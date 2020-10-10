@@ -32,9 +32,14 @@ export const getVolunteer = () => async (dispatch) => {
    }
 };
 
-export const getSingleVolunteer = (email) => (dispatch) => {
-   dispatch({
-      type: VOLUNTEER,
-      payload: email,
-   });
+export const getSingleVolunteer = (email) => async (dispatch) => {
+   try {
+      const res = await Axios.get(`/volunteer/${email}`);
+      dispatch({
+         type: VOLUNTEER,
+         payload: res.data,
+      });
+   } catch (err) {
+      console.log(err.message);
+   }
 };
