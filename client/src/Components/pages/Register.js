@@ -1,17 +1,19 @@
-import React, { useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 // logo
 import logo from "../../images/logo.png";
 
 import { getSingleEvent } from "../../action/event";
+import { registerVolunteer } from "../../action/volunteer";
 import moment from "moment";
 
 const Registration = ({
    auth: { user },
    event: { events, event },
    getSingleEvent,
+   registerVolunteer,
    match,
 }) => {
    useEffect(() => {
@@ -19,6 +21,38 @@ const Registration = ({
          getSingleEvent(match.params.id);
       }
    }, [events]);
+
+   const [formData, setFormData] = useState({
+      name: user && user.displayName,
+      email: user && user.email,
+   });
+   const title = useRef(event && event.title);
+   const description = useRef(event && event.description);
+   const date = useRef(event && event.date);
+   const { name, email } = formData;
+   const onSubmit = (e) => {
+      e.preventDefault();
+      setFormData({
+         name: user && user.displayName,
+         email: user && user.email,
+         description: event && event.description,
+         date: event && event.date,
+      });
+      title.current = event && event.title;
+      description.current = event && event.description;
+      date.current = event && event.date;
+
+      registerVolunteer(
+         {
+            name,
+            email,
+            description: description.current,
+            date: date.current,
+         },
+         match.params.id
+      );
+   };
+
    return (
       <div className="py-50 login text-center">
          <div className="container">
@@ -30,7 +64,10 @@ const Registration = ({
                   <h1 className="heading text-left f-700 fs-24">
                      Register as a Volunteer
                   </h1>
-                  <form className="form text-left">
+                  <form
+                     className="form text-left"
+                     onSubmit={(e) => onSubmit(e)}
+                  >
                      <div className="form-group mt-40">
                         <div className="form-item">
                            <input
@@ -116,4 +153,6 @@ const mapstatetoprops = (state) => ({
    event: state.event,
 });
 
-export default connect(mapstatetoprops, { getSingleEvent })(Registration);
+export default connect(mapstatetoprops, { getSingleEvent, registerVolunteer })(
+   Registration
+);

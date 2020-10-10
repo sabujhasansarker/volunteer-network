@@ -18,17 +18,18 @@ exports.getUser = async (req, res) => {
 
 exports.addUser = async (req, res) => {
    try {
-      const event = await Events.findOne({ id: req.params.id });
-
+      const { name, email, description, date } = req.body;
+      const event = await Events.findOne({ _id: req.params.id });
       if (!event) {
          return res.status(404).json({ message: "Your Events not found" });
       }
-      const volunteer = await Volunteer.find({ event: req.params.id });
-      if (!volunteer) {
+      const volunteer = await Volunteer.find({ email: email });
+
+      const ev = volunteer.map((vo) => vo.event && vo.event == req.params.id);
+
+      if (ev.includes(true)) {
          return res.json({ message: "Your event already added" });
       }
-
-      const { name, email, description, date } = req.body;
       const newVolunteer = new Volunteer({
          name,
          email,
