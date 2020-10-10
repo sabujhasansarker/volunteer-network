@@ -56,11 +56,11 @@ export const deleteEvent = (id, image) => (dispatch) => {
    try {
       // Create a reference to the file to delete
       var desertRef = storage.refFromURL(image);
-      console.log(desertRef);
       desertRef
          .delete()
          .then(async () => {
             await Axios.delete(`/event/${id}`);
+            console.log("deleted");
             dispatch({
                type: DELETE_EVENT,
                payload: id,

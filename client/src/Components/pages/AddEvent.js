@@ -80,7 +80,7 @@ const AddEvent = ({ events, deleteEvent }) => {
                      banner: "",
                   });
                   setPopUp(false);
-                  setOne(false);
+                  setOne(true);
                }}
             />
          )}
