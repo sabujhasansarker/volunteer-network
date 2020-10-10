@@ -58,3 +58,18 @@ exports.deleteVolunteer = async (req, res) => {
       error(res, err);
    }
 };
+
+exports.getEventByUser = async (req, res) => {
+   try {
+      const volunteers = await Volunteer.findById(req.params.id)
+         .populate("event")
+         .exec();
+      if (volunteers.length !== 0) {
+         return res.status(200).json(volunteers);
+      } else {
+         return res.status(404).json({ message: "Volunteer is empty" });
+      }
+   } catch (err) {
+      err(res, err);
+   }
+};

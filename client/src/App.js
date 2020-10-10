@@ -11,13 +11,15 @@ import AddEvent from "./Components/pages/AddEvent";
 
 import { getUser } from "./action/auth";
 import { getEvent } from "./action/event";
+import { getVolunteer } from "./action/volunteer";
 import PrivateRoute from "./Components/layouts/PrivateRoute";
 import NotFound from "./Components/pages/NotFound";
 
-const App = ({ getUser, user, getEvent }) => {
+const App = ({ getUser, user, getEvent, getVolunteer }) => {
    useEffect(() => {
       getUser();
       getEvent();
+      getVolunteer();
    }, []);
 
    return (
@@ -43,4 +45,6 @@ const mapstatetoprops = (state) => ({
    user: state.auth.user,
 });
 
-export default connect(mapstatetoprops, { getUser, getEvent })(App);
+export default connect(mapstatetoprops, { getUser, getEvent, getVolunteer })(
+   App
+);

@@ -15,21 +15,30 @@ const Registration = ({
    getSingleEvent,
    registerVolunteer,
    match,
+   volunteers,
 }) => {
+   const [active, setActive] = useState({});
    useEffect(() => {
       if (events.length !== 0) {
          getSingleEvent(match.params.id);
       }
-   }, [events]);
+      setActive(
+         volunteers.find(
+            (vo) => vo.event && vo.event._id == match.params.id && vo.event
+         )
+      );
+   }, [volunteers]);
 
    const [formData, setFormData] = useState({
       name: user && user.displayName,
       email: user && user.email,
    });
+
    const title = useRef(event && event.title);
    const description = useRef(event && event.description);
    const date = useRef(event && event.date);
    const { name, email } = formData;
+
    const onSubmit = (e) => {
       e.preventDefault();
       setFormData({
@@ -75,7 +84,7 @@ const Registration = ({
                               type="text"
                               name="fullName"
                               placeholder="Full Name"
-                              value={user && user.displayName}
+                              value={user ? user.displayName : ""}
                               disabled
                            />
                         </div>
@@ -87,7 +96,7 @@ const Registration = ({
                               type="email"
                               name="email"
                               placeholder="Username or Email"
-                              value={user && user.email}
+                              value={user ? user.email : ""}
                               disabled
                            />
                         </div>
@@ -100,8 +109,9 @@ const Registration = ({
                               name="date"
                               placeholder="Date"
                               value={
-                                 event &&
-                                 moment(event.date).format("YYYY-MM-DD")
+                                 event
+                                    ? moment(event.date).format("YYYY-MM-DD")
+                                    : ""
                               }
                               disabled
                            />
@@ -114,7 +124,7 @@ const Registration = ({
                               type="text"
                               name="fullName"
                               placeholder="Description"
-                              value={event && event.description}
+                              value={event ? event.description : ""}
                               disabled
                            />
                         </div>
@@ -126,18 +136,31 @@ const Registration = ({
                               type="text"
                               name="fullName"
                               placeholder="Organize books at the library."
-                              value={event && event.title}
+                              value={event ? event.title : ""}
                               disabled
                            />
                         </div>
                      </div>
                      <div className="form-group mt-40">
                         <div className="form-item">
-                           <input
-                              type="submit"
-                              className="button d-block w-100 text-center p-12 f-500 fs-16 border-none bg-3f90fc"
-                              value="Registration"
-                           />
+                           {active ? (
+                              <Link
+                                 to="/events"
+                                 className="f-500 p-12 bg-ff444a br-5 w-100 text-center fs-16"
+                                 style={{
+                                    textDecoration: "none",
+                                    display: "block",
+                                 }}
+                              >
+                                 You already resister for this event
+                              </Link>
+                           ) : (
+                              <input
+                                 type="submit"
+                                 className="button d-block w-100 text-center p-12 f-500 fs-16 border-none bg-3f90fc"
+                                 value="Registration"
+                              />
+                           )}
                         </div>
                      </div>
                   </form>
@@ -151,6 +174,7 @@ const Registration = ({
 const mapstatetoprops = (state) => ({
    auth: state.auth,
    event: state.event,
+   volunteers: state.volunteer.volunteers,
 });
 
 export default connect(mapstatetoprops, { getSingleEvent, registerVolunteer })(

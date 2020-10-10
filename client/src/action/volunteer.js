@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { ADD_EVENT, GET_EVENT, GET_SINGLE } from "./type";
+import { REGISTER_VOLUNTEER, GET_VOLUNTEER } from "./type";
 
 const config = {
    headers: {
@@ -9,10 +9,24 @@ const config = {
 
 export const registerVolunteer = (data, id) => async (dispatch) => {
    try {
-      console.log(data);
       const body = JSON.stringify(data);
-      const res = await Axios.post(`/${id}`, body, config);
-      console.log(res.data);
+      const res = await Axios.post(`/volunteer/${id}`, body, config);
+      dispatch({
+         type: REGISTER_VOLUNTEER,
+         payload: res.data,
+      });
+   } catch (err) {
+      console.log(err.message);
+   }
+};
+
+export const getVolunteer = () => async (dispatch) => {
+   try {
+      const res = await Axios.get("/volunteer");
+      dispatch({
+         type: GET_VOLUNTEER,
+         payload: res.data,
+      });
    } catch (err) {
       console.log(err.message);
    }
