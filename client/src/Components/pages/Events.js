@@ -13,9 +13,9 @@ const Events = ({ volunteer, deleteVolunteer }) => {
          <Navbar />
          <div className="event py-30 pt-150">
             <div className="container">
-               <div className="event-container">
-                  {volunteer &&
-                     volunteer.map((volunteer, i) => (
+               {volunteer.length > 0 ? (
+                  <div className="event-container">
+                     {volunteer.map((volunteer, i) => (
                         <div className="event-single p-24 br-10" key={i}>
                            <img
                               src={volunteer.event && volunteer.event.banner}
@@ -39,7 +39,15 @@ const Events = ({ volunteer, deleteVolunteer }) => {
                            </div>
                         </div>
                      ))}
-               </div>
+                  </div>
+               ) : (
+                  <h2
+                     className="text-center w-100 fs-50 py-50"
+                     style={{ display: "block" }}
+                  >
+                     Event not found
+                  </h2>
+               )}
             </div>
          </div>
       </Fragment>
