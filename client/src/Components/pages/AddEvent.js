@@ -6,8 +6,10 @@ import upload from "../../images/upload.png";
 
 import moment from "moment";
 import PopUp from "./PopUp";
+import deleteImage from "../../images/delete.png";
+import { connect } from "react-redux";
 
-const AddEvent = () => {
+const AddEvent = ({ events }) => {
    const [formData, setFormData] = useState({
       title: "",
       description: "",
@@ -167,10 +169,55 @@ const AddEvent = () => {
                      />
                   </div>
                </form>
+
+               <table className="br-13 w-100 p-10 pb-50 addEvent-table">
+                  <thead>
+                     <tr className="br-13 pt-18 pb-18 pl-33 pr-33">
+                        <th className="w-20">Title</th>
+                        <th className="w-30">Description</th>
+                        <th className="w-15">Created</th>
+                        <th className="w-29">Banner</th>
+                        <th className="w-6 text-right">Actions</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {events &&
+                        events.map((event, i) => (
+                           <tr key={i} className=" pt-21  pl-33 pr-33">
+                              <td className="w-20">{event && event.title}</td>
+                              <td className="w-30">
+                                 {event && event.description.substring(0, 30)}
+                                 ...
+                              </td>
+                              <td className="w-15">
+                                 {moment(event && event.date).format(
+                                    "MM-DD-YYYY"
+                                 )}
+                              </td>
+                              <td className="w-29">
+                                 <img
+                                    className="w-35 table-banner"
+                                    src={event && event.banner}
+                                    alt=""
+                                 />
+                              </td>
+                              <td className="w-6">
+                                 <div className="image-container  bg-ff444a br-4 wpx-30 cursor-pointer">
+                                    <img src={deleteImage} alt="" />
+                                 </div>
+                              </td>
+                           </tr>
+                        ))}
+                  </tbody>
+               </table>
             </div>
          </div>
       </Fragment>
    );
 };
 
-export default AddEvent;
+const mapstatetoprops = (state) => ({
+   events: state.event.events,
+});
+
+export default connect(mapstatetoprops, {})(AddEvent);

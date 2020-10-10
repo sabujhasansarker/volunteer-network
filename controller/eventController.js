@@ -1,4 +1,5 @@
 const Event = require("../models/Events");
+const Volunteer = require("../models/Volunteer");
 const { error } = require("../utilities/error");
 
 exports.getEvents = async (req, res) => {
@@ -32,6 +33,7 @@ exports.addEvent = async (req, res) => {
 
 exports.deleteEvent = async (req, res) => {
    try {
+      await Volunteer.find({ event: req.params.id }).remove();
       await Event.findByIdAndDelete(req.params.id);
       return res.json({ message: "Event deleted" });
    } catch (err) {

@@ -49,3 +49,10 @@ export const getSingleEvent = (data) => (dispatch) => {
       payload: data,
    });
 };
+
+export const deleteEvent = (id, image) => (dispatch) => {
+   try {
+   } catch (err) {
+      console.log(err.message);
+   }
+};
