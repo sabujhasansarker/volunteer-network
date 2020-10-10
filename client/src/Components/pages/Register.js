@@ -25,7 +25,7 @@ const Registration = ({
       setActive(
          volunteer &&
             volunteer.find(
-               (vo) => vo.event && vo.email == user.email && vo.event
+               (vo) => vo.event && vo.event._id == match.params.id && vo
             )
       );
    }, [volunteer]);
@@ -61,10 +61,8 @@ const Registration = ({
          },
          match.params.id
       );
-      console.log("register");
-      return <Redirect to="/events" />;
+      return window.location.replace("/events");
    };
-   console.log(active);
    return (
       <div className="py-50 login text-center">
          <div className="container">

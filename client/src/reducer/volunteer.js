@@ -38,6 +38,7 @@ export default (state = initialState, action) => {
          return {
             ...state,
             volunteer: state.volunteer.filter((v) => v._id !== payload && v),
+            volunteers: state.volunteers.filter((v) => v._id !== payload && v),
          };
       default:
          return state;
