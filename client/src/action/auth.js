@@ -1,6 +1,8 @@
 import { GET_USER, USER_ERROR } from "./type";
 import { google, auth } from "../config/firebase";
 
+import { getSingleVolunteer } from "./volunteer";
+
 export const getUser = () => async (dispatch) => {
    try {
       auth.onAuthStateChanged((user) => {
@@ -8,6 +10,7 @@ export const getUser = () => async (dispatch) => {
             type: user ? GET_USER : USER_ERROR,
             payload: user ? user.providerData[0] : null,
          });
+         dispatch(getSingleVolunteer(user && user.providerData[0].email));
       });
    } catch (err) {
       console.log(err.message);

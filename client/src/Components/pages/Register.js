@@ -15,7 +15,7 @@ const Registration = ({
    getSingleEvent,
    registerVolunteer,
    match,
-   volunteers,
+   volunteer,
 }) => {
    const [active, setActive] = useState({});
    useEffect(() => {
@@ -23,12 +23,12 @@ const Registration = ({
          getSingleEvent(match.params.id);
       }
       setActive(
-         volunteers &&
-            volunteers.find(
-               (vo) => vo.event && vo.event._id == match.params.id && vo.event
+         volunteer &&
+            volunteer.find(
+               (vo) => vo.event && vo.email == user.email && vo.event
             )
       );
-   }, [volunteers]);
+   }, [volunteer]);
 
    const [formData, setFormData] = useState({
       name: user && user.displayName,
@@ -61,9 +61,10 @@ const Registration = ({
          },
          match.params.id
       );
+      console.log("register");
       return <Redirect to="/events" />;
    };
-
+   console.log(active);
    return (
       <div className="py-50 login text-center">
          <div className="container">
@@ -176,7 +177,7 @@ const Registration = ({
 const mapstatetoprops = (state) => ({
    auth: state.auth,
    event: state.event,
-   volunteers: state.volunteer.volunteers,
+   volunteer: state.volunteer.volunteer,
 });
 
 export default connect(mapstatetoprops, { getSingleEvent, registerVolunteer })(

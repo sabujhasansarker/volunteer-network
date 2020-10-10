@@ -1,4 +1,9 @@
-import { REGISTER_VOLUNTEER, GET_VOLUNTEER, VOLUNTEER } from "../action/type";
+import {
+   REGISTER_VOLUNTEER,
+   GET_VOLUNTEER,
+   VOLUNTEER,
+   ERROR_VOLUNTEER,
+} from "../action/type";
 
 const initialState = {
    volunteers: [],
@@ -22,6 +27,11 @@ export default (state = initialState, action) => {
          return {
             ...state,
             volunteer: payload,
+         };
+      case ERROR_VOLUNTEER:
+         return {
+            ...state,
+            volunteer: [],
          };
       default:
          return state;
