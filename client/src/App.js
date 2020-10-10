@@ -26,13 +26,13 @@ const App = ({ getUser, user, getEvent }) => {
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <PrivateRoute exact path="/events" component={Events} />
+            <PrivateRoute exact path="/registration/:id" component={Register} />
             {user && user.email === "sabujhasansarker@gmail.com" && (
                <Fragment>
                   <PrivateRoute exact path="/admin" component={Admin} />
                   <PrivateRoute exact path="/add-event" component={AddEvent} />
                </Fragment>
             )}
-            <PrivateRoute exact path="/registration/:id" component={Register} />
             <Route component={NotFound} />
          </Switch>
       </Router>

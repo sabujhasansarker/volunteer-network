@@ -1,7 +1,8 @@
-import { GET_EVENT, ADD_EVENT } from "../action/type";
+import { GET_EVENT, ADD_EVENT, GET_SINGLE } from "../action/type";
 
 const initialState = {
    events: [],
+   event: null,
 };
 
 export default (state = initialState, action) => {
@@ -11,6 +12,11 @@ export default (state = initialState, action) => {
          return {
             ...state,
             events: payload,
+         };
+      case GET_SINGLE:
+         return {
+            ...state,
+            event: state.events && state.events.find((ev) => ev._id == payload),
          };
       case ADD_EVENT:
          return {

@@ -49,12 +49,16 @@ const Home = ({ events, searchEvents }) => {
                </div>
             </div>
             <div className="container">
-               <div className="card-container">
-                  {events &&
-                     events.map((event) => (
-                        <Card key={event._id} event={event} />
-                     ))}
-               </div>
+               {events.length !== 0 ? (
+                  <div className="card-container pb-50">
+                     {events &&
+                        events.map((event) => (
+                           <Card key={event._id} event={event} />
+                        ))}
+                  </div>
+               ) : (
+                  <h2 className="text-center fs-50 py-50">Event not found</h2>
+               )}
             </div>
          </div>
       </Fragment>

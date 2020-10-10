@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { ADD_EVENT, GET_EVENT } from "./type";
+import { ADD_EVENT, GET_EVENT, GET_SINGLE } from "./type";
 
 const config = {
    headers: {
@@ -41,4 +41,11 @@ export const getEvent = () => async (dispatch) => {
    } catch (err) {
       console.log(err.message);
    }
+};
+
+export const getSingleEvent = (data) => (dispatch) => {
+   dispatch({
+      type: GET_SINGLE,
+      payload: data,
+   });
 };
