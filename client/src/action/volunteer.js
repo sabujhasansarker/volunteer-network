@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { REGISTER_VOLUNTEER, GET_VOLUNTEER } from "./type";
+import { REGISTER_VOLUNTEER, GET_VOLUNTEER, VOLUNTEER } from "./type";
 
 const config = {
    headers: {
@@ -30,4 +30,11 @@ export const getVolunteer = () => async (dispatch) => {
    } catch (err) {
       console.log(err.message);
    }
+};
+
+export const getSingleVolunteer = (email) => (dispatch) => {
+   dispatch({
+      type: VOLUNTEER,
+      payload: email,
+   });
 };

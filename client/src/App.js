@@ -11,16 +11,26 @@ import AddEvent from "./Components/pages/AddEvent";
 
 import { getUser } from "./action/auth";
 import { getEvent } from "./action/event";
-import { getVolunteer } from "./action/volunteer";
+import { getVolunteer, getSingleVolunteer } from "./action/volunteer";
 import PrivateRoute from "./Components/layouts/PrivateRoute";
 import NotFound from "./Components/pages/NotFound";
 
-const App = ({ getUser, user, getEvent, getVolunteer }) => {
+const App = ({
+   getUser,
+   user,
+   getEvent,
+   getVolunteer,
+   getSingleVolunteer,
+   volunteers,
+   volunteer,
+   events,
+}) => {
    useEffect(() => {
-      getUser();
-      getEvent();
-      getVolunteer();
-   }, []);
+      !user && getUser();
+      events.length <= 0 && getEvent();
+      volunteers.length <= 0 && getVolunteer();
+      !volunteer && getSingleVolunteer(user && user.email);
+   }, [volunteers]);
 
    return (
       <Router>
@@ -43,8 +53,14 @@ const App = ({ getUser, user, getEvent, getVolunteer }) => {
 
 const mapstatetoprops = (state) => ({
    user: state.auth.user,
+   volunteers: state.volunteer.volunteers,
+   volunteer: state.volunteer.volunteer,
+   events: state.event.events,
 });
 
-export default connect(mapstatetoprops, { getUser, getEvent, getVolunteer })(
-   App
-);
+export default connect(mapstatetoprops, {
+   getUser,
+   getEvent,
+   getVolunteer,
+   getSingleVolunteer,
+})(App);

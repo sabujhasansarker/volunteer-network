@@ -1,7 +1,8 @@
-import { REGISTER_VOLUNTEER, GET_VOLUNTEER } from "../action/type";
+import { REGISTER_VOLUNTEER, GET_VOLUNTEER, VOLUNTEER } from "../action/type";
 
 const initialState = {
    volunteers: [],
+   volunteer: null,
 };
 
 export default (state = initialState, action) => {
@@ -16,6 +17,13 @@ export default (state = initialState, action) => {
          return {
             ...state,
             volunteers: { payload, ...state.volunteers },
+         };
+      case VOLUNTEER:
+         return {
+            ...state,
+            volunteer: state.volunteers.find(
+               (volunteer) => volunteer.email == payload && volunteer
+            ),
          };
       default:
          return state;

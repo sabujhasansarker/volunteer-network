@@ -6,3 +6,4 @@ export const GET_EVENT = "GET_EVENT";
 export const GET_SINGLE = "GET_SINGLE";
 export const GET_VOLUNTEER = "GET_VOLUNTEER";
 export const REGISTER_VOLUNTEER = "REGISTER_VOLUNTEER";
+export const VOLUNTEER = "VOLUNTEER";
