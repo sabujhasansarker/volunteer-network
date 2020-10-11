@@ -22,7 +22,8 @@ export default (state = initialState, action) => {
       case REGISTER_VOLUNTEER:
          return {
             ...state,
-            volunteers: [...state.volunteers, payload],
+            volunteers: [payload, ...state.volunteers],
+            volunteer: [payload, ...state.volunteers],
          };
       case VOLUNTEER:
          return {

@@ -26,7 +26,7 @@ exports.addUser = async (req, res) => {
       if (!event) {
          return res.status(404).json({ message: "Your Events not found" });
       }
-      const volunteer = await Volunteer.find({ email: email });
+      let volunteer = await Volunteer.find({ email: email });
 
       const ev = volunteer.map((vo) => vo.event && vo.event == req.params.id);
 
@@ -41,7 +41,11 @@ exports.addUser = async (req, res) => {
          event: req.params.id,
       });
       await newVolunteer.save();
-      return res.status(200).json(newVolunteer);
+
+      volunteer = await Volunteer.findById(newVolunteer._id)
+         .populate("event")
+         .exec();
+      return res.status(200).json(volunteer);
    } catch (err) {
       error(res, err);
    }
