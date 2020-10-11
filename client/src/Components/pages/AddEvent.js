@@ -188,8 +188,13 @@ const AddEvent = ({ events, deleteEvent }) => {
                            <tr key={i} className=" pt-21  pl-33 pr-33">
                               <td className="w-20">{event && event.title}</td>
                               <td className="w-30">
-                                 {event && event.description.substring(0, 30)}
-                                 ...
+                                 {event &&
+                                    event.description &&
+                                    event.description.substring(0, 30)}
+                                 {event &&
+                                    event.description &&
+                                    event.description.length > 30 &&
+                                    "..."}
                               </td>
                               <td className="w-15">
                                  {moment(event && event.date).format(

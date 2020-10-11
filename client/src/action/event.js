@@ -41,7 +41,7 @@ export const getEvent = () => async (dispatch) => {
          payload: res.data,
       });
    } catch (err) {
-      console.log(err.message);
+      console.log(err);
    }
 };
 

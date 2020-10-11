@@ -14,10 +14,10 @@ const config = {
 };
 
 export const registerVolunteer = (data, id) => async (dispatch) => {
-   console.log(data, id);
    try {
       const body = JSON.stringify(data);
       const res = await Axios.post(`/volunteer/${id}`, body, config);
+      console.log(res.data);
       dispatch({
          type: REGISTER_VOLUNTEER,
          payload: res.data,
@@ -40,7 +40,6 @@ export const getVolunteer = () => async (dispatch) => {
 };
 
 export const getSingleVolunteer = (email) => async (dispatch) => {
-   console.log(email);
    try {
       const res = await Axios.get(`/volunteer/${email}`);
       dispatch({

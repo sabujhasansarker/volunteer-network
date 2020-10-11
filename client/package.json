@@ -1,6 +1,8 @@
 {
-   "name": "client",
+   "name": "volunteer-client",
    "version": "0.1.0",
+   "private": true,
+   "homepage": "https://sabujhasansarker.github.io/volunteer-client/",
    "private": true,
    "dependencies": {
       "@testing-library/jest-dom": "^4.2.4",
@@ -8,6 +10,7 @@
       "@testing-library/user-event": "^7.2.1",
       "axios": "^0.19.2",
       "firebase": "^7.22.1",
+      "gh-pages": "^3.1.0",
       "moment": "^2.29.1",
       "node-sass": "^4.14.1",
       "react": "^16.13.1",
@@ -23,7 +26,8 @@
       "start": "react-scripts start",
       "build": "react-scripts build",
       "test": "react-scripts test",
-      "eject": "react-scripts eject"
+      "eject": "react-scripts eject",
+      "deploy": "gh-pages -d build"
    },
    "eslintConfig": {
       "extends": "react-app"
@@ -40,6 +44,6 @@
          "last 1 safari version"
       ]
    },
-   "proxy": "https://fierce-atoll-24597.herokuapp.com/",
+   "proxy": "https://fierce-atoll-24597.herokuapp.com",
    "secure": false
 }
