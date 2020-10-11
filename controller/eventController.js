@@ -18,14 +18,17 @@ exports.getEvents = async (req, res) => {
 exports.addEvent = async (req, res) => {
    try {
       const { title, description, date, banner } = req.body;
-      const newEvent = new Event({
-         title,
-         description,
-         date,
-         banner,
-      });
-      await newEvent.save();
-      return res.json(newEvent);
+      const event = await Event.findOne({ banner });
+      if (!event) {
+         const newEvent = new Event({
+            title,
+            description,
+            date,
+            banner,
+         });
+         await newEvent.save();
+         return res.json(newEvent);
+      }
    } catch (err) {
       error(res, err);
    }
