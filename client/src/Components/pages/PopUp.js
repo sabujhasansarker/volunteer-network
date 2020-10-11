@@ -28,9 +28,10 @@ const PopUp = ({
                .ref(`/images/${file.name + math}`)
                .getDownloadURL();
             if (!one) {
-               addEvent({ banner, title, description, date });
+               console.log("add");
                onClick();
                submitData();
+               addEvent({ banner, title, description, date });
             }
          });
    };

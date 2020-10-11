@@ -18,6 +18,7 @@ const Registration = ({
    volunteer,
 }) => {
    const [active, setActive] = useState({});
+   const [redirect, setRedirect] = useState(false);
    useEffect(() => {
       if (events.length !== 0) {
          getSingleEvent(match.params.id);
@@ -61,8 +62,11 @@ const Registration = ({
          },
          match.params.id
       );
-      return window.location.replace("/events");
+      setRedirect(true);
    };
+
+   if (redirect) return <Redirect to="/events" />;
+
    return (
       <div className="py-50 login text-center">
          <div className="container">
@@ -160,6 +164,7 @@ const Registration = ({
                                  type="submit"
                                  className="button d-block w-100 text-center p-12 f-500 fs-16 border-none bg-3f90fc"
                                  value="Registration"
+                                 onClick={(e) => onSubmit(e)}
                               />
                            )}
                         </div>

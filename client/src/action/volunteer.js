@@ -14,6 +14,7 @@ const config = {
 };
 
 export const registerVolunteer = (data, id) => async (dispatch) => {
+   console.log(data, id);
    try {
       const body = JSON.stringify(data);
       const res = await Axios.post(`/volunteer/${id}`, body, config);
